@@ -1,0 +1,5 @@
+// Função que permite converter o valor para rem -> Unidade de medida
+@function rem-calc($size) {
+    $value: $size / 16;
+    @return #{$value}rem;
+}
