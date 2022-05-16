@@ -1,29 +1,34 @@
 <poke-header></poke-header>
 
 <main>
-    <section class="pokemon_names">
-        <h1>{{pokemon[0].name}}</h1>
-        <h2>{{pokemon[1].names[0].name}}</h2>
-    </section>
+    
+    <ng-template [ngIf]="isLoading">
+        <section class="pokemon_names">
+            <h1 class="slideInLeft">{{pokemon[0].name}}</h1>
+            <h2 class="slideInRight">{{pokemon[1].names[0].name}}</h2>
+        </section>
+        <section class="pokemon_status">
+            <img
+            [src]="pokemon[0].sprites.other.dream_world.front_default"
+            [alt]="pokemon[0].name"
+            class="slideInDown">
+            <article class="pokemon_status_statistics fadeIn">
+                <section>
+                    <h3>Estatísticas</h3>
+                    <ol>
+                        <li *ngFor="let value of pokemon[0].stats">
+                            {{ value.stat.name }}
+        
+                          <strong>
+                            {{ value.base_stat }}
+                          </strong>
+                        </li>
+                      </ol>
+                </section>
+                <a class="btn btn_secondary" [routerLink]="['']">Voltar</a>
+            </article>
+        </section>
+    </ng-template>
 
-    <section class="pokemon_status">
-        <img 
-        [src]="pokemon[0].sprites.other.dream_world.front_default"
-        [alt]="pokemon[0].name">
-
-        <article class="pokemon_static_statitistics">
-            <section>
-                <h3>Estatísticas</h3>
-
-                <ol>
-                    <li *ngFor="let value of pokemon[0].stats">{{value.stat.name}}>
-
-                    <strong>{{value.base_stat}}</strong>
-
-                </ol>
-            </section>
-
-            <a [routerLink]="['']">Voltar</a>
-        </article>
-    </section>
+    <img src="assets/error.png" alt="Erro nos detalhes do pokemon" width="100%" *ngIf="apiError"> 
 </main>
